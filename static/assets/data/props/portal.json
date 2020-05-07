@@ -1,0 +1,46 @@
+{
+    "DOCTYPE": "PROP_SHEET",
+    "props": [{
+        "name": "blue",
+        "size": {
+            "x": 24,
+            "y": 0,
+            "z": 32
+        },
+        "collType": "IGNORE",
+        "fix": {
+            "gfx": "media\/entity\/portal\/portals.png",
+            "x": 0,
+            "y": 0,
+            "w": 24,
+            "h": 32,
+            "flipX": false,
+            "shape": "Y_FLAT",
+            "pivotX": 12,
+            "pivotY": 16,
+            "offX": -12,
+            "offY": -5
+        }
+    }, {
+        "name": "orange",
+        "size": {
+            "x": 24,
+            "y": 0,
+            "z": 32
+        },
+        "collType": "IGNORE",
+        "fix": {
+            "gfx": "media\/entity\/portal\/portals.png",
+            "x": 24,
+            "y": 0,
+            "w": 24,
+            "h": 32,
+            "flipX": false,
+            "shape": "Y_FLAT",
+            "pivotX": 12,
+            "pivotY": 16,
+            "offX": -12,
+            "offY": -5
+        }
+    }]
+}

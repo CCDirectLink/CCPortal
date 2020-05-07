@@ -1,0 +1,7 @@
+{
+    "name": "ccportal",
+    "ccmodHumanName": "CCPortal: Thinking with portals",
+    "description": "You monster.",
+    "version": "1.0.0",
+    "plugin": "plugin.js"
+}
