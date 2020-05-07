@@ -1,0 +1,35 @@
+{
+  "name": "ccportal",
+  "version": "1.0.0",
+  "description": "You monster.",
+  "main": "dist/plugin.js",
+  "scripts": {
+    "start": "tsc && npm run copy",
+    "watch": "npm run copy && tsc -w",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "copy": "cp -r static/* dist/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CCDirectLink/CCPortal.git"
+  },
+  "keywords": [
+    "CrossCode",
+    "Portal",
+    "TypeScript"
+  ],
+  "author": "CCDirectLink",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CCDirectLink/CCPortal/issues"
+  },
+  "homepage": "https://github.com/CCDirectLink/CCPortal#readme",
+  "devDependencies": {
+    "@types/node": "^13.11.0",
+    "@typescript-eslint/eslint-plugin": "^2.26.0",
+    "@typescript-eslint/parser": "^2.26.0",
+    "eslint": "^6.8.0",
+    "eslint-plugin-import": "^2.20.2",
+    "typescript": "^3.8.3"
+  }
+}
