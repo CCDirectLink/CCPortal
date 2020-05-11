@@ -128,7 +128,7 @@ export default class CCPortal extends Plugin {
 		
 		const displayPos: Vec3 = {
 			x: alignedBottom.x,
-			y: alignedBottom.y,
+			y: alignedBottom.y - 5,
 			z: alignedBottom.z - alignedBottom.z%16
 		};
 		const display = ig.game.spawnEntity('Prop', displayPos.x, displayPos.y, displayPos.z, {name: '', propType: {
@@ -138,8 +138,8 @@ export default class CCPortal extends Plugin {
 
 		const render = renderer.trace(alignedBottom, color !== 'blue'); //Inverted color because it's displayed on the other side
 
-		displayPos.x -= 8;
-		displayPos.y -= 16;
+		displayPos.x -= 3;
+		//displayPos.y -= 5;
 		
 		if (connected) {
 			display.fixDraw.x = 0;

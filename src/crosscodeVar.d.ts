@@ -13,7 +13,7 @@ declare class Vec3 {
     public y: number;
     public z: number;
     
-    public static create(copy?: Vec3): Vec2;
+    public static create(copy?: Vec3): Vec3;
     public static add(to: Vec3, from: Vec3, target?: Vec3): Vec3;
     public static sub(to: Vec3, from: Vec3, target?: Vec3): Vec3;
     public static div(to: Vec3, from: Vec3, target?: Vec3): Vec3;

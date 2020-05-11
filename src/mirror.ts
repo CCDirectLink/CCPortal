@@ -26,7 +26,7 @@ export class Mirror {
 
 	private update(): void {
 		if (ig.game.playerEntity) {
-			const pos = Mirror.mirror(ig.game.playerEntity.coll.pos, this.portalA, this.portalB);
+			const pos = this.mirror(ig.game.playerEntity.coll.pos, this.portalA, this.portalB);
 			this.entity.setPos(pos.x, pos.y, pos.z, undefined);
 		}
 	}
@@ -41,7 +41,7 @@ export class Mirror {
 	}
 
 
-	public static mirror(init: Vec3, a: Vec2, b: Vec2): Vec3 {
+	public mirror(init: Vec3, a: Vec2, b: Vec2): Vec3 {
 		const offset = Vec2.sub(init, a, Vec2.create());
 		offset.x *= -1;
 		offset.y *= -1;
