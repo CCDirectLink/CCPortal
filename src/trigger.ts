@@ -21,6 +21,6 @@ export class Trigger {
 	}
 
 	private isInPortal(player: ig.ENTITY.Player, portal: Vec2): boolean {
-		return player.coll.contains(portal.x, portal.y - 16, false);
+		return player.coll.contains(portal.x + 12, portal.y - 0.001, false);
 	}
 }
