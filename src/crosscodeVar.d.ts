@@ -12,6 +12,11 @@ declare class Vec3 {
     public x: number;
     public y: number;
     public z: number;
+    
+    public static create(copy?: Vec3): Vec2;
+    public static add(to: Vec3, from: Vec3, target?: Vec3): Vec3;
+    public static sub(to: Vec3, from: Vec3, target?: Vec3): Vec3;
+    public static div(to: Vec3, from: Vec3, target?: Vec3): Vec3;
 }
 
 interface CollData {
@@ -24,7 +29,13 @@ interface CollData {
 interface Level {
     collision: ig.MAP.Collision;
     height: number;
+    maps: ig.MAP.Background[];
 }
+
+interface Levels {
+    [level: number]: Level;
+}
+
 declare namespace ig {
     export enum PROJECTILE_KILL_TYPE {
         WALL = 1,
@@ -56,6 +67,17 @@ declare namespace ig {
         EAST_UP = 2,
         WEST_UP = 3,
         SOUTH_UP = 4
+    }
+
+    namespace ENTITY {
+        interface Prop {
+            fixDraw: {
+                image: ig.Image;
+                x: number;
+                flipX: boolean;
+                flipY: boolean;
+            }
+        }
     }
 
     const game: sc.CrossCode;

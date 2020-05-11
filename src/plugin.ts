@@ -1,5 +1,6 @@
 import { Mirror } from './mirror.js';
 import { Trigger } from './trigger.js';
+import { Renderer } from './renderer.js';
 
 enum COLL_TYPE {
 	WALL = 2,
@@ -14,17 +15,27 @@ interface PortalData {
 	data: number[];
 	original: number[];
 	index: number[];
+	render: HTMLCanvasElement;
 }
 
 export default class CCPortal extends Plugin {
 	private blue?: PortalData;
 	private orange?: PortalData;
 	private last = 0;
+	private dummy1!: ig.Image;
+	private dummy2!: ig.Image;
 	private readonly mirror = new Mirror();
 	private readonly trigger = new Trigger();
+	private readonly blueRenderer = new Renderer();
+	private readonly orangeRenderer = new Renderer();
 
 	public async prestart(): Promise<void> {
 		this.mirror.init();
+		this.blueRenderer.init();
+		this.orangeRenderer.init();
+
+		this.dummy1 = new ig.Image('media/entity/portal/dummy1.png');
+		this.dummy2 = new ig.Image('media/entity/portal/dummy2.png');
 
 		const self = this;
 		ig.ENTITY.Ball.inject({
@@ -37,7 +48,7 @@ export default class CCPortal extends Plugin {
 								self.blue = undefined;
 							}
 							const alignedBottom = this.getAlignedPos(ig.ENTITY_ALIGN.BOTTOM, undefined) as Vec3;
-							self.blue = self.makePortalUp('blue', pos, alignedBottom);
+							self.blue = self.makePortalUp('blue', pos, alignedBottom, self.blueRenderer, self.orange);
 							self.last = 1;
 						} else {
 							if (self.orange) {
@@ -45,7 +56,7 @@ export default class CCPortal extends Plugin {
 								self.orange = undefined;
 							}
 							const alignedBottom = this.getAlignedPos(ig.ENTITY_ALIGN.BOTTOM, undefined) as Vec3;
-							self.orange = self.makePortalUp('orange', pos, alignedBottom);
+							self.orange = self.makePortalUp('orange', pos, alignedBottom, self.orangeRenderer, self.blue);
 							self.last = 2;
 						}
 						if (self.blue && self.orange) {
@@ -68,9 +79,9 @@ export default class CCPortal extends Plugin {
 		});
 	}
 	
-	private makePortalUp(color: string, pos: Vec2, alignedBottom: Vec3): PortalData {
+	private makePortalUp(color: string, pos: Vec2, alignedBottom: Vec3, renderer: Renderer, connected?: PortalData): PortalData {
 		const groundPos = this.calcGroundPosUp(pos);
-		const levels = ig.game.levels as Level[];
+		const levels = ig.game.levels as Levels;
 		//TODO: pick correct level
 		const level = levels[0];
 		const collData = level.collision.data as number[][];
@@ -123,10 +134,20 @@ export default class CCPortal extends Plugin {
 		const display = ig.game.spawnEntity('Prop', displayPos.x, displayPos.y, displayPos.z, {name: '', propType: {
 			sheet: 'portal',
 			name: color
-		}}, undefined);
+		}}, undefined) as ig.ENTITY.Prop;
+
+		const render = renderer.trace({x: displayPos.x, y: displayPos.y + 16, z: displayPos.z}, color !== 'blue'); //Inverted color because it's displayed on the other side
 
 		displayPos.x -= 8;
 		displayPos.y -= 16;
+		
+		if (connected) {
+			display.fixDraw.x = 0;
+			display.fixDraw.image = color === 'blue' ? this.dummy1 : this.dummy2;
+			display.fixDraw.image.data = connected.render as unknown as ig.Image;
+			display.fixDraw.flipX = true;
+			display.fixDraw.flipY = true;
+		}
 
 		return {
 			pos: displayPos,
@@ -135,7 +156,8 @@ export default class CCPortal extends Plugin {
 			display,
 			index,
 			left,
-			right
+			right,
+			render
 		};
 	}
 
