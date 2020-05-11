@@ -144,6 +144,7 @@ export default class CCPortal extends Plugin {
 		if (connected) {
 			display.fixDraw.x = 0;
 			display.fixDraw.image = color === 'blue' ? this.dummy1 : this.dummy2;
+			display.fixDraw.image.increaseRef();
 			display.fixDraw.image.data = connected.render as unknown as ig.Image;
 			display.fixDraw.flipX = true;
 			display.fixDraw.flipY = true;
