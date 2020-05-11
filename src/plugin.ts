@@ -136,7 +136,7 @@ export default class CCPortal extends Plugin {
 			name: color
 		}}, undefined) as ig.ENTITY.Prop;
 
-		const render = renderer.trace({x: displayPos.x, y: displayPos.y + 16, z: displayPos.z}, color !== 'blue'); //Inverted color because it's displayed on the other side
+		const render = renderer.trace(alignedBottom, color !== 'blue'); //Inverted color because it's displayed on the other side
 
 		displayPos.x -= 8;
 		displayPos.y -= 16;

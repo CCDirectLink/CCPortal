@@ -18,7 +18,7 @@ export class Renderer {
 	}
 
 	public trace(pos: Vec3, blue: boolean): HTMLCanvasElement {
-		pos.y -= 12;
+		pos.z -= 12;
 
 		const portalOffset = (pos.x - 12) % 16;
 
@@ -57,13 +57,12 @@ export class Renderer {
 	private render(tile: Vec3, target: Vec2): void {
 		const levels = ig.game.levels as Levels;
 		const filtered = <Level[]>Object.values(levels)
-			.filter(l => l.height <= tile.z)
-			.reverse();
+			.filter(l => l.height <= tile.z);
 
 		for (const level of filtered) {
 			for (const map of level.maps) {
 				const tiles = map.tiles;
-				const row = tile.y + (tile.z - level.height)/16 ;
+				const row = tile.y + (tile.z - level.height)/16*2;
 
 				if (!map.data[row] || !map.data[row][tile.x]) {
 					continue;
