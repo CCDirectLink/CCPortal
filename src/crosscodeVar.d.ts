@@ -86,5 +86,7 @@ declare namespace ig {
         };
     }
 
+    const system: ig.System;
+    const input: ig.Input;
     const game: sc.CrossCode;
 }

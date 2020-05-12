@@ -12,6 +12,7 @@ export default class CCPortal extends Plugin {
 
 	public async prestart(): Promise<void> {
 		this.mirror.init();
+		this.trigger.init();
 		this.blue.init();
 		this.orange.init();
 

@@ -1,6 +1,14 @@
+import { Input } from './input.js';
+
 export class Trigger {
+	private readonly input = new Input();
+
 	private portalA: Vec2 = {x: 10000, y: 10000};
 	private portalB: Vec2 = {x: 10000, y: 10000};
+
+	public init(): void {
+		this.input.init();
+	}
 	
 	public setPortals(a: Vec2, b: Vec2): void {
 		this.portalA = a;
@@ -11,11 +19,11 @@ export class Trigger {
 		const player = ig.game.playerEntity as ig.ENTITY.Player | undefined;
 		if (player) {
 			if (this.isInPortal(player, this.portalA)) {
-				const pos = this.translate(player, this.portalA, this.portalB);
-				player.setPos(pos.x, pos.y, pos.z, undefined);
+				this.translate(player, this.portalA, this.portalB);
+				this.input.mirror();
 			} else if (this.isInPortal(player, this.portalB)) {
-				const pos = this.translate(player, this.portalB, this.portalA);
-				player.setPos(pos.x, pos.y, pos.z, undefined);
+				this.translate(player, this.portalB, this.portalA);
+				this.input.mirror();
 			}
 		}
 	}
@@ -27,13 +35,13 @@ export class Trigger {
 			&& center.y >= portal.y - 16 && center.y < portal.y;
 	}
 
-	private translate(player: ig.ENTITY.Player, start: Vec2, end: Vec2): Vec3 {
+	private translate(player: ig.ENTITY.Player, start: Vec2, end: Vec2): void {
 		const center = player.getAlignedPos(ig.ENTITY_ALIGN.BOTTOM, undefined) as Vec3;
 
 		const result = Vec3.create(player.coll.pos);
 		result.x += end.x - start.x + 2 * (start.x - player.coll.pos.x) - player.coll.size.x;
 		result.y += end.y - start.y + 2 * (start.y - center.y);
 
-		return result;
+		player.setPos(result.x, result.y, result.z, undefined);
 	}
 }
