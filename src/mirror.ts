@@ -44,7 +44,7 @@ export class Mirror {
 
 	public mirror(init: Vec3, a: Vec2, b: Vec2, size: Vec2): Vec3 {
 		return {
-			x: init.x + 2 * (a.x - init.x) + (b.x - a.x) - size.x + 12,
+			x: init.x + 2 * (a.x - init.x) + (b.x - a.x) - size.x,
 			y: init.y + 2 * (a.y - init.y) + (b.y - a.y) - size.y,
 			z: init.z
 		};
