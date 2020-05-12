@@ -31,7 +31,7 @@ export class Trigger {
 		const center = player.getAlignedPos(ig.ENTITY_ALIGN.BOTTOM, undefined) as Vec3;
 
 		const result = Vec3.create(player.coll.pos);
-		result.x += end.x - start.x;
+		result.x += end.x - start.x + 2 * (start.x - player.coll.pos.x) - player.coll.size.x;
 		result.y += end.y - start.y + 2 * (start.y - center.y);
 
 		return result;
