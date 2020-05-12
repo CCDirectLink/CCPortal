@@ -25,8 +25,9 @@ export class Mirror {
 	}
 
 	private update(): void {
-		if (ig.game.playerEntity) {
-			const pos = this.mirror(ig.game.playerEntity.coll.pos, this.portalA, this.portalB);
+		const player = ig.game.playerEntity as ig.ENTITY.Player | undefined;
+		if (player) {
+			const pos = this.mirror(player.coll.pos, this.portalA, this.portalB, player.coll.size);
 			this.entity.setPos(pos.x, pos.y, pos.z, undefined);
 		}
 	}
@@ -41,14 +42,10 @@ export class Mirror {
 	}
 
 
-	public mirror(init: Vec3, a: Vec2, b: Vec2): Vec3 {
-		const offset = Vec2.sub(init, a, Vec2.create());
-		offset.x *= -1;
-		offset.y *= -1;
-		Vec2.add(offset, b);
+	public mirror(init: Vec3, a: Vec2, b: Vec2, size: Vec2): Vec3 {
 		return {
-			x: offset.x,
-			y: offset.y,
+			x: init.x + 2 * (a.x - init.x) + (b.x - a.x) - size.x + 12,
+			y: init.y + 2 * (a.y - init.y) + (b.y - a.y) - size.y,
 			z: init.z
 		};
 	}

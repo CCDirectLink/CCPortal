@@ -18,7 +18,8 @@
             "shape": "Y_FLAT",
             "pivotX": 12,
             "pivotY": 16,
-            "offX": -12
+            "offX": -12,
+            "offY": 32
         }
     }, {
         "name": "orange",
@@ -38,7 +39,8 @@
             "shape": "Y_FLAT",
             "pivotX": 12,
             "pivotY": 16,
-            "offX": -12
+            "offX": -12,
+            "offY": 32
         }
     }]
 }

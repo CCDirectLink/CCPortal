@@ -18,8 +18,6 @@ export class Renderer {
 	}
 
 	public trace(pos: Vec3, blue: boolean): HTMLCanvasElement {
-		pos.z -= 12;
-
 		const portalOffset = (pos.x - 12) % 16;
 
 		this.clear();

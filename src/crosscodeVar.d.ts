@@ -80,5 +80,11 @@ declare namespace ig {
         }
     }
 
+    namespace Image {
+        const cache: {
+            [key: string]: ig.Image;
+        };
+    }
+
     const game: sc.CrossCode;
 }
