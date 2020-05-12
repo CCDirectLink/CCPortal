@@ -24,7 +24,7 @@ export default class CCPortal extends Plugin {
 				if (type === ig.PROJECTILE_KILL_TYPE.WALL) {
 					if (data.blockDir.y == -1) {
 						const alignedBottom = this.getAlignedPos(ig.ENTITY_ALIGN.BOTTOM, undefined) as Vec3;
-						Vec3.add(alignedBottom, {x: 0, y: 0, z: -12}); //Map to floor
+						Vec3.add(alignedBottom, {x: 0, y: -this.coll.size.y/2, z: -12}); //Map to floor
 
 						if (self.last == 0 || self.last == 2) {
 							self.blue.open(alignedBottom, data.blockDir);

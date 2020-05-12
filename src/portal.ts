@@ -45,7 +45,7 @@ export class Portal {
 		if (dir.x == 0 && dir.y == -1) {
 			const displayPos: Vec3 = {
 				x: position.x,
-				y: position.y - 5 - 32,
+				y: position.y - 32,
 				z: position.z - position.z%16
 			};
 			
